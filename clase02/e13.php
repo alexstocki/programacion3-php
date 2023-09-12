@@ -12,5 +12,17 @@ pertenece a algún elemento del listado.
 */
 
 function ValidarLength($palabra, $max) {
-    
+    if ($palabra === "Recuperatorio" 
+    || $palabra === "Parcial"
+    || $palabra === "Programacion") {
+        return 1;
+    } else if (strlen($palabra) > $max) {
+        return "Palabra excede el maximo determinado";
+    } else {
+        return 0;
+    }
 }
+
+echo ValidarLength("Seleccion", 3) . "<br>";
+echo ValidarLength("Parcial", 19) . "<br>";
+echo ValidarLength("Recuperatorio", 22);
