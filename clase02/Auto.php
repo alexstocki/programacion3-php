@@ -1,6 +1,7 @@
 <?php
 
     /*
+    Stocki Alex
     Realizar una clase llamada “Auto” 
     que posea los siguientes atributos privados: 
     _color (String)
@@ -66,5 +67,42 @@
                 return 0;
             }
         }
+
+        public static function Save($auto) {
+            echo Auto::MostrarAuto($auto);
+
+            $archivo = fopen("autos.csv", "w");
+
+            if ($archivo !== false) {
+                fwrite($archivo, $auto->_marca . "," . $auto->_color . "," . $auto->_precio . "," . $auto->_fecha->format('d-m-Y') . "<br>");
+                fclose($archivo);
+            }
+            else {
+                echo "No se pudo abrir una mierda<br>";
+                return false;
+            }
+            
+            return true;
+        }
+
+        public static function Read() {
+            $archivo = fopen("autos.csv", "r");
+            $arrayAutos = [];
+
+            if ($archivo != false) {
+                while (!feof($archivo)) {
+                    $linea = fgets($archivo);
+                    $auto = explode(",", $linea);
+                    array_push($arrayAutos, new Auto($auto[0], $auto[1], $auto[2]));
+                }
+
+                fclose($archivo);
+
+                return $arrayAutos;
+            }
+
+            return false;
+        }
     }
-    
+
+    ?>    

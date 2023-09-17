@@ -1,5 +1,6 @@
 <?php
 /*
+    Stocki Alex
     Crear la clase Garage que posea como atributos privados:
 
     _razonSocial (String)
@@ -40,7 +41,13 @@ class Garage {
     }
 
     public function MostrarGarage() {
-        return "Nombre garage: " . $this->_razonSocial . "<br>" . "Precio por hora: " . $this->_precioPorHora . "<br>" . "Autos: " . "<br>";
+        $arrayAutos = "";
+
+        foreach($this->_autos as $auto) {
+            $arrayAutos .= Auto::MostrarAuto($auto);
+        }
+
+        return "Nombre garage: " . $this->_razonSocial . "<br>" . "Precio por hora: " . $this->_precioPorHora . "<br>" . "Autos: " . $arrayAutos . "<br>";
     }
 
     public function Equals($auto) {
