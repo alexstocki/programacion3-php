@@ -69,16 +69,15 @@
         }
 
         public static function Save($auto) {
-            echo Auto::MostrarAuto($auto);
-
-            $archivo = fopen("autos.csv", "w");
+            $archivo = fopen("auto.csv", "a");
 
             if ($archivo !== false) {
-                fwrite($archivo, $auto->_marca . "," . $auto->_color . "," . $auto->_precio . "," . $auto->_fecha->format('d-m-Y') . "<br>");
+                echo "<br>Se abrio/creo el archivo<br>";
+                fwrite($archivo, $auto->_marca . ";" . $auto->_color . ";" . $auto->_precio . ";" . $auto->_fecha->format('d-m-Y') . "\n");
                 fclose($archivo);
             }
             else {
-                echo "No se pudo abrir una mierda<br>";
+                echo "No se pudo abrir el archivo<br>";
                 return false;
             }
             
@@ -86,16 +85,19 @@
         }
 
         public static function Read() {
-            $archivo = fopen("autos.csv", "r");
+            $archivo = fopen("auto.csv", "r");
             $arrayAutos = [];
 
             if ($archivo != false) {
                 while (!feof($archivo)) {
                     $linea = fgets($archivo);
-                    $auto = explode(",", $linea);
-                    array_push($arrayAutos, new Auto($auto[0], $auto[1], $auto[2]));
-                }
+                    $auto = explode(";", $linea);
 
+                    if ($auto[0] !== "") {
+                        array_push($arrayAutos, new Auto($auto[0], $auto[1], $auto[2]));
+                    }
+                }
+                
                 fclose($archivo);
 
                 return $arrayAutos;

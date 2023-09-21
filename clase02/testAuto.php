@@ -48,7 +48,7 @@
 include_once "Auto.php";
 
 $auto1 = new Auto("Ford", "rojo");
-$auto2 = new Auto("Ford", "azul");
+// $auto2 = new Auto("Ford", "azul");
 
 // $auto3 = new Auto("Fiat", "verde", 19700.55);
 // $auto4 = new Auto("Fiat", "verde", 19700.50);
@@ -56,18 +56,7 @@ $auto2 = new Auto("Ford", "azul");
 // $auto5 = new Auto("Audi", "negro", 25250.99);
 // $auto6 = new Auto("Audi", "negro", 25250.99);
 
-echo "hola<br>";
-if (Auto::Save($auto1)) {
-    echo "Se guardo exitosamente el auto 1<br>";
-} else {
-    echo "No se guardo el auto 1";
-}
-
-// if (Auto::Save($auto2)) {
-//     echo "Se guardo exitosamente el auto 2";
-// } else {
-//     echo "No se guardo el auto 2";
-// }
+Auto::Save($auto1);
 
 // $precioNuevoA4 = $auto4->AgregarImpuestos(1500);
 // $precioNuevoA5 = $auto5->AgregarImpuestos(1500);

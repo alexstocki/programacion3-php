@@ -37,20 +37,31 @@ include_once "Auto.php";
 include_once "Garage.php";
 
 $auto1 = new Auto("Ford", "rojo");
-$auto2 = new Auto("Ford", "azul");
-$auto3 = new Auto("Fiat", "verde", 19700.55);
-$auto4 = new Auto("Fiat", "verde", 19700.50);
+// $auto2 = new Auto("Ford", "azul");
+// $auto3 = new Auto("Fiat", "verde", 19700.55);
+// $auto4 = new Auto("Fiat", "verde", 19700.50);
 
-$garage = new Garage("Garage 1", 100);
+// $garage = new Garage("Garage 1", 100);
+$garage = Garage::Read();
+$arrayAutos = Auto::Read();
 
-$garage->Add($auto1);
-$garage->Add($auto2);
-$garage->Add($auto3);
-$garage->Add($auto4);
+$garage->LoadCarsFromFile($arrayAutos);
+
 echo $garage->MostrarGarage();
 
-$garage->Remove($auto1);
-echo $garage->MostrarGarage();
 
-$garage->Remove($auto1);
-echo $garage->MostrarGarage();
+
+// $garage->Add($auto1);
+// $garage->Add($auto2);
+// $garage->Add($auto3);
+// $garage->Add($auto4);
+
+// Garage::Save($garage);
+
+// echo $garage->MostrarGarage();
+
+// $garage->Remove($auto1);
+// echo $garage->MostrarGarage();
+
+// $garage->Remove($auto1);
+// echo $garage->MostrarGarage();

@@ -78,4 +78,57 @@ class Garage {
             return false;
         }
     }
+
+    public static function Save($garage) {
+        $fileName = Garage::GetGarageNameForFile($garage, true) . ".csv";
+        $archivo = fopen($fileName, "a");
+        
+
+        if ($archivo !== false) {
+            fwrite($archivo, $garage->_razonSocial . ";" . $garage->_precioPorHora);
+            fclose($archivo);
+        }
+        else {
+            return false;
+        }
+
+        return true;
+    }
+
+    public static function Read() {
+        $fileName = Garage::GetGarageNameForFile('Garage 1', false) . ".csv";
+        $archivo = fopen($fileName, "r");
+        $garageFromFile;
+
+        if ($archivo !== false) {
+            while (!feof($archivo)) {
+                $linea = fgets($archivo);
+                $garage = explode(";", $linea);
+
+                if ($garage[0] !== "") {
+                    $garageFromFile = new Garage($garage[0], $garage[1]);
+                }
+            }
+            
+            fclose($archivo);
+
+            return $garageFromFile;
+        }
+
+        return false;
+    }
+
+    public static function GetGarageNameForFile($garage, $isObject) {
+        if ($isObject) {
+            return str_replace(" ", "-", $garage->_razonSocial);
+        }
+
+        return str_replace(" ", "-", $garage);
+    }
+
+    public function LoadCarsFromFile($arrayAutos) {        
+        foreach($arrayAutos as $auto) {
+            $this->Add($auto);
+        }
+    }   
 }
