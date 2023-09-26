@@ -20,8 +20,18 @@
             $archivo = fopen("usuarios.json", 'a');
 
             if ($archivo !== false) {
-                fwrite($archivo, json_decode($archivo));
+                // formateo de $usuario a JSON
+                $usuarioJSON = json_encode($usuario);
+
+                // agrego un salto de linea
+                $usuarioJSON .= "\n";
+
+                // escribo en el archivo
+                fwrite($archivo, $usuarioJSON);
+
+                // cierro el archivo
                 fclose($archivo);
+
                 return true;
             }
 
