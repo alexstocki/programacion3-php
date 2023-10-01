@@ -7,11 +7,11 @@
         public $id;
         public $fechaRegistro;
 
-        public function __construct($nombre, $clave, $mail) {
+        public function __construct($nombre, $clave, $mail, $id = null) {
             $this->nombre = $nombre;
             $this->clave = $clave;
             $this->mail = $mail;
-            $this->id = rand(1, 10000);
+            $this->id = $id ?? rand(1, 10000);
             $this->fechaRegistro = date('d-m-Y');
             echo "Inside Usuario class construct<br>";
         }
@@ -36,5 +36,9 @@
             }
 
             return false;
+        }
+
+        public function MostrarUsuario() {
+            echo "Clave: " . $this->clave . "<br>" . "Nombre: " . $this->nombre . "<br>" . "Mail: " . $this->mail . "<br>" . "Fecha de registro: " . $this->fechaRegistro . "<br>"; 
         }
     }
