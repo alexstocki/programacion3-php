@@ -1,6 +1,7 @@
 <?php
 
     /*
+        Stocki Alex
         Recibe los datos del usuario (nombre, clave, mail) por POST
         crea un ID autoincremental (emulado, puede ser un random de 1 a 10000).
         crear un dato con la fecha de registro, toma todos los datos y utilizar sus metodos
@@ -12,7 +13,7 @@
 
     include_once "./Clases/Usuario.php";
 
-    // carpeta donde se almacena la foto
+    // Ruta para almacenar la foto
     $carpeta_archivos = 'Usuarios/Fotos/';
 
     echo "<h1>Carga de Usuario en JSON</h1>";
@@ -41,7 +42,7 @@
     // Ruta destino, carpeta + nombre del archivo que quiero guardar
     $ruta_destino = $carpeta_archivos . $nombre_archivo;
 
-    // Realizamos las validaciones del archivo
+    // Posibles validaciones
     if (!((strpos($tipo_archivo, 'png') || strpos($tipo_archivo, 'jpeg')) && ($tamano_archivo < 300000))) {
         echo "La extension o el size de los archivos no es correcta. <br><br><table><tr><td><li>Se permiten archivos .png o .jpg<br><li>se permiten archivos de 100 Kb maximo.</td></tr></table>";
     } else {
