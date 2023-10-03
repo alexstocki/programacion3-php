@@ -1,6 +1,7 @@
 <?php
 
     /*
+        Stocki Alex
         Recibe los datos del usuario (nombre, clave, mail) por POST
         crea un ID autoincremental (emulado, puede ser un random de 1 a 10000).
         crear un dato con la fecha de registro, toma todos los datos y utilizar sus metodos
