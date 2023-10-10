@@ -19,10 +19,10 @@
         }
 
         public function RetornarUltimoIdInsertado() {
-            return $this->objetoPDO-<lastInsertId();
+            return $this->objetoPDO->lastInsertId();
         }
 
-        public static function retornarObjetoAcceso() {
+        public static function RetornarObjetoAcceso() {
             if (!isset(self::$ObjetoAccesoDb)) {
                 self::$ObjetoAccesoDb = new AccesoDb();
             }
