@@ -5,7 +5,7 @@ include_once "PizzaCarga.php";
 class PizzaConsultar {
     public static function ConsultarPizza($sabor, $tipo) {
         if (isset($_POST["sabor"]) && isset($_POST["tipo"])) {
-            $pizzas = PizzaCarga::Leer();
+            $pizzas = PizzaCarga::Leer("Pizza.json");
             $retorno = false;
 
             if (count($pizzas) > 0) {

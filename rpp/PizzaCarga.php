@@ -46,22 +46,26 @@ class PizzaCarga {
                 if (PizzaCarga::Equals($p, $incomingPizza)) {
                     $p->precio = $incomingPizza->precio;
                     $p->cantidad += $incomingPizza->cantidad;
+                    echo "Actualizando pizza...<br>";
                     $match = true;
                     break;
                 }
             }
             if (!$match) {
+                echo "Agregando pizza...<br>";
                 array_push($pizzas, $incomingPizza);
             }
         } else {
             array_push($pizzas, $incomingPizza);
         }
 
+        echo "Pizza guardada...<br>";
+
         ManejadorArchivos::Guardar("Pizza.json", $pizzas);
     }
 
-    public static function Leer() {
-        $pizzas = ManejadorArchivos::Leer("Pizza.json");
+    public static function Leer($archivo) {
+        $pizzas = ManejadorArchivos::Leer($archivo);
         $pizzasObj = [];
 
         if (count($pizzas) > 0) {
