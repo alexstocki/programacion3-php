@@ -1,0 +1,370 @@
+{
+	"info": {
+		"_postman_id": "308155f6-fcf0-46ee-b0af-bc2316865b61",
+		"name": "PrimerParcial",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16114240"
+	},
+	"item": [
+		{
+			"name": "Agregar cliente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "imagen",
+							"type": "file",
+							"src": "/Users/macbookprom1/Desktop/cliente.png"
+						},
+						{
+							"key": "nombreApellido",
+							"value": "Juan Carlos Edesur",
+							"type": "text"
+						},
+						{
+							"key": "tipoDocumento",
+							"value": "DNI",
+							"type": "text"
+						},
+						{
+							"key": "numeroDocumento",
+							"value": "1234098756",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "carlos@edesur.com",
+							"type": "text"
+						},
+						{
+							"key": "tipoCliente",
+							"value": "corporativo",
+							"type": "text"
+						},
+						{
+							"key": "pais",
+							"value": "Argentina",
+							"type": "text"
+						},
+						{
+							"key": "ciudad",
+							"value": "La Pampa",
+							"type": "text"
+						},
+						{
+							"key": "telefono",
+							"value": "1230984756",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/programacion3-php/primerParcial/?accion=alta",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"programacion3-php",
+						"primerParcial",
+						""
+					],
+					"query": [
+						{
+							"key": "accion",
+							"value": "alta"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar cliente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tipoCliente",
+							"value": "corporativo",
+							"type": "text"
+						},
+						{
+							"key": "numeroCliente",
+							"value": "632907",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/programacion3-php/primerParcial/?accion=consultar",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"programacion3-php",
+						"primerParcial",
+						""
+					],
+					"query": [
+						{
+							"key": "accion",
+							"value": "consultar"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar reserva",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tipoCliente",
+							"value": "corporativo",
+							"type": "text"
+						},
+						{
+							"key": "numeroCliente",
+							"value": "632907",
+							"type": "text"
+						},
+						{
+							"key": "fechaEntrada",
+							"value": "23-10-2023",
+							"type": "text"
+						},
+						{
+							"key": "fechaSalida",
+							"value": "25-20-2023",
+							"type": "text"
+						},
+						{
+							"key": "tipoHabitacion",
+							"value": "Suite presidencial",
+							"type": "text"
+						},
+						{
+							"key": "importeTotal",
+							"value": "3500",
+							"type": "text"
+						},
+						{
+							"key": "imagen",
+							"type": "file",
+							"src": "/Users/macbookprom1/Desktop/reserva.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/programacion3-php/primerParcial/?accion=reservar",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"programacion3-php",
+						"primerParcial",
+						""
+					],
+					"query": [
+						{
+							"key": "accion",
+							"value": "reservar"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar reservas",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "fechaListar",
+						"value": "algo",
+						"type": "text"
+					},
+					{
+						"key": "tipoHabitacion",
+						"value": "algo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "localhost/programacion3-php/primerParcial/?tipoHabitacion=suite presidencial&fechaListar=23-10-2023",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"programacion3-php",
+						"primerParcial",
+						""
+					],
+					"query": [
+						{
+							"key": "tipoHabitacion",
+							"value": "suite presidencial"
+						},
+						{
+							"key": "fechaListar",
+							"value": "23-10-2023"
+						},
+						{
+							"key": "numeroCliente",
+							"value": "513691",
+							"disabled": true
+						},
+						{
+							"key": "fechaDesde",
+							"value": "01-10-2023",
+							"disabled": true
+						},
+						{
+							"key": "fechaHasta",
+							"value": "31-10-2023",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar cliente",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombreApellido\":\"Edgar Poe\",\n    \"tipoDocumento\":\"CI\",\n    \"numeroDocumento\":\"19081020\",\n    \"email\":\"edgarallan@poe.net\",\n    \"tipoCliente\":\"CORPORATIVO\",\n    \"pais\":\"Estados Unidos\",\n    \"ciudad\":\"San Francisco\",\n    \"telefono\":\"54097658\",\n    \"id\":659711\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost/programacion3-php/primerParcial/",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"programacion3-php",
+						"primerParcial",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cancelar reserva",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "tipoCliente",
+							"value": "INDIVIDUAL",
+							"type": "text"
+						},
+						{
+							"key": "idCliente",
+							"value": "513691",
+							"type": "text"
+						},
+						{
+							"key": "idReserva",
+							"value": "489094",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/programacion3-php/primerParcial/?accion=cancelar",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"programacion3-php",
+						"primerParcial",
+						""
+					],
+					"query": [
+						{
+							"key": "accion",
+							"value": "cancelar"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ajustar reserva",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "idReserva",
+							"value": "33563",
+							"type": "text"
+						},
+						{
+							"key": "motivo",
+							"value": "Descuento PROMO CAMPEON 2022",
+							"type": "text"
+						},
+						{
+							"key": "importeNuevo",
+							"value": "2022",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/programacion3-php/primerParcial/?accion=ajustar",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"programacion3-php",
+						"primerParcial",
+						""
+					],
+					"query": [
+						{
+							"key": "accion",
+							"value": "ajustar"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
