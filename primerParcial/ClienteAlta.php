@@ -1,18 +1,17 @@
 <?php
-
     include_once "ManejadorArchivo.php";
 
     class ClienteAlta {
-        public function __construct($nombreApellido, $tipoDocumento, $numeroDocumento, $email, $tipoCliente, $pais, $ciudad, $telefono) {
+        public function __construct($nombreApellido, $tipoDocumento, $numeroDocumento, $email, $tipoCliente, $pais, $ciudad, $telefono, $id = null) {
             $this->nombreApellido = $nombreApellido;
-            $this->tipoDocumento = $tipoDocumento;
+            $this->tipoDocumento = strtoupper($tipoDocumento);
             $this->numeroDocumento = $numeroDocumento;
             $this->email = $email;
-            $this->tipoCliente = $tipoCliente;
+            $this->tipoCliente = strtoupper($tipoCliente);
             $this->pais = $pais;
             $this->ciudad = $ciudad;
             $this->telefono = $telefono;
-            $this->id = rand(1, 999999);
+            $this->id = $id == null ? rand(1, 999999) : $id;
         }
 
         // retorna un objeto JSON 
@@ -21,9 +20,7 @@
         }
 
         // guardar cliente en archivo
-        public static function GuardarCliente($archivo, $cliente) {
-            // $clientes = array();
-
+        public static function GuardarCliente($archivo, $cliente, $carpeta_imagenes) {
             // leer archivo
             $clientes = ClienteAlta::LeerClientes($archivo);
 
@@ -37,10 +34,8 @@
                 foreach ($clientes as $c) {
                     // si el cliente existe
                     if (ClienteAlta::CompararClientes($c, $cliente)) {
-                        // sobreescribo los datos del cliente existente con los datos que recibo
-                        $c = ClienteAlta::ModificarDatosCliente($c, $cliente);
+                        echo "Error - El cliente ya existe<br>";
                         $flag = true;
-                        echo "Cliente modificado con exito<br>";
                     }
                 }
                 // si el cliente no existe, lo agrego
@@ -51,9 +46,15 @@
                 // agregar cliente
                 array_push($clientes, $cliente);
             }
-            // guardar archivo
-            ManejadorArchivo::Guardar($archivo, $clientes);
-            echo "Cliente guardado con exito<br>";
+            // guardar cliente y foto
+            if (!$flag) {
+                $nombreImagen = $cliente->id . strtoupper(substr($cliente->tipoCliente, 0, 2));
+                ManejadorArchivo::Guardar($archivo, $clientes);
+                ManejadorArchivo::GuardarImagen($carpeta_imagenes, $nombreImagen);
+            }
+            else {
+                echo "No se guardo el cliente<br>";
+            }
         }
 
         // leer clientes de archivo
@@ -69,32 +70,24 @@
                 $clientesParseados = ClienteAlta::ParsearClientes($clientes);
                 return $clientesParseados;
             }
+
             return null;
         }
 
-        // parsear array a cliente
-        // private static function ParsearClientes($arrayClientes) {
-        //     $clientes = []; 
-        //     foreach ($arrayClientes as $cliente) {
-        //         $c = new ClienteAlta($cliente["nombreApellido"], $cliente["tipoDocumento"], $cliente["numeroDocumento"], $cliente["email"], $cliente["tipoCliente"], $cliente["pais"], $cliente["ciudad"], $cliente["telefono"]);
-        //         // $c = new ClienteAlta($cliente->nombreApellido, $cliente->tipoDocumento, $cliente->numeroDocumento, $cliente->email, $cliente->tipoCliente, $cliente->pais, $cliente->ciudad, $cliente->telefono);
-        //         array_push($clientes, $c);
-        //     }
-        //     return $clientes;
-        // }
         private static function ParsearClientes($arrayClientes) {
             $clientes = []; 
+
             foreach ($arrayClientes as $cliente) {
                 if (is_array($cliente)) {
-                    $c = new ClienteAlta($cliente["nombreApellido"], $cliente["tipoDocumento"], $cliente["numeroDocumento"], $cliente["email"], $cliente["tipoCliente"], $cliente["pais"], $cliente["ciudad"], $cliente["telefono"]);
+                    $c = new ClienteAlta($cliente["nombreApellido"], $cliente["tipoDocumento"], $cliente["numeroDocumento"], $cliente["email"], $cliente["tipoCliente"], $cliente["pais"], $cliente["ciudad"], $cliente["telefono"], $cliente["id"]);
                 } else {
-                    $c = new ClienteAlta($cliente->nombreApellido, $cliente->tipoDocumento, $cliente->numeroDocumento, $cliente->email, $cliente->tipoCliente, $cliente->pais, $cliente->ciudad, $cliente->telefono);
+                    $c = new ClienteAlta($cliente->nombreApellido, $cliente->tipoDocumento, $cliente->numeroDocumento, $cliente->email, $cliente->tipoCliente, $cliente->pais, $cliente->ciudad, $cliente->telefono, $cliente->id);
                 }
                 array_push($clientes, $c);
             }
+
             return $clientes;
-        }
-           
+        }  
 
         // compara dos clientes, tomando como referencia: nombre y apellido y tipo de cliente
         private static function CompararClientes($clienteBase, $clienteIncoming) {
@@ -102,19 +95,7 @@
                 $clienteBase->tipoCliente == $clienteIncoming->tipoCliente) {
                 return true;
             }
+            
             return false;
-        }
-
-        // modificar cliente
-        private static function ModificarDatosCliente($clienteBaseDatos, $clienteIncoming) {
-            $clienteBaseDatos->nombreApellido = $clienteIncoming->nombreApellido;
-            $clienteBaseDatos->tipoDocumento = $clienteIncoming->tipoDocumento;
-            $clienteBaseDatos->numeroDocumento = $clienteIncoming->numeroDocumento;
-            $clienteBaseDatos->email = $clienteIncoming->email;
-            $clienteBaseDatos->tipoCliente = $clienteIncoming->tipoCliente;
-            $clienteBaseDatos->pais = $clienteIncoming->pais;
-            $clienteBaseDatos->ciudad = $clienteIncoming->ciudad;
-            $clienteBaseDatos->telefono = $clienteIncoming->telefono;
-            return $clienteBaseDatos;
         }
     }

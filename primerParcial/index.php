@@ -1,29 +1,39 @@
 <?php
-
-    include_once "ManejadorArchivo.php";
-    include_once "ClienteAlta.php";
-
+    
     switch ($_SERVER['REQUEST_METHOD']) {
         case 'POST':
-            if (isset($_POST['nombreApellido']) && isset($_POST['tipoDocumento']) 
-                && isset($_POST['numeroDocumento']) && isset($_POST['email']) 
-                && isset($_POST['tipoCliente']) && isset($_POST['pais']) 
-                && isset($_POST['ciudad']) && isset($_POST['telefono'])) {
-                    $cliente = new ClienteAlta($_POST['nombreApellido'], $_POST['tipoDocumento'], $_POST['numeroDocumento'], $_POST['email'], $_POST['tipoCliente'], $_POST['pais'], $_POST['ciudad'], $_POST['telefono']);
-                    ClienteAlta::GuardarCliente("hoteles.json", $cliente);
-            } 
-            else {
-                echo "Faltan datos<br>";
+            switch ($_GET['accion']) {
+                case 'alta':
+                    echo "Entro en el POST - alta<br>";
+                    include "ManejadorClienteAlta.php";
+                    break;
+                case 'consultar':
+                    echo "Entro en el POST - consultar<br>";
+                    include "ManejadorConsultarCliente.php";
+                    break;
+                case 'reservar':
+                    echo "Entro en el POST - reservar<br>";
+                    include "ManejadorReservaHabitacion.php";
+                    break;
+                case 'cancelar':
+                    echo "Entro en el POST - cancelar<br>";
+                    include "ManejadorCancelarReserva.php";
+                    break;
+                case 'ajustar':
+                    echo "Entro en el POST - ajuste<br>";
+                    include "ManejadorAjusteReserva.php";
+                    break;
             }
-            
             break;
         case 'GET':
-            echo "No implementado<br>";
+            echo "Entro en el GET - consulta reservas<br>";
+            include "ManejadorConsultaReservas.php";
             break;
         case 'PUT':
-            echo "No implementado<br>";
+            echo "Entro en el PUT - modificar cliente<br>";
+            include "ModificarCliente.php";
             break;
-        case 'DELETE':
+        default:
             echo "No implementado<br>";
             break;
     }
