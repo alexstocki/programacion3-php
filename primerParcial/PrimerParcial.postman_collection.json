@@ -21,7 +21,7 @@
 						},
 						{
 							"key": "nombreApellido",
-							"value": "Juan Carlos Edesur",
+							"value": "Jhon Doe",
 							"type": "text"
 						},
 						{
@@ -31,12 +31,12 @@
 						},
 						{
 							"key": "numeroDocumento",
-							"value": "1234098756",
+							"value": "123678",
 							"type": "text"
 						},
 						{
 							"key": "email",
-							"value": "carlos@edesur.com",
+							"value": "j@d.com",
 							"type": "text"
 						},
 						{
@@ -51,12 +51,22 @@
 						},
 						{
 							"key": "ciudad",
-							"value": "La Pampa",
+							"value": "Buenos Aires",
 							"type": "text"
 						},
 						{
 							"key": "telefono",
-							"value": "1230984756",
+							"value": "111222333",
+							"type": "text"
+						},
+						{
+							"key": "modalidadPago",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "345",
 							"type": "text"
 						}
 					]
@@ -361,6 +371,34 @@
 							"key": "accion",
 							"value": "ajustar"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar usuario",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"numeroDocumento\": 123,\n    \"tipoCliente\": \"CORPODNI\",\n    \"id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost/programacion3-php/primerParcial/",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"programacion3-php",
+						"primerParcial",
+						""
 					]
 				}
 			},

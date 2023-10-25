@@ -15,7 +15,6 @@
             return json_encode($this);
         }
 
-        // public static function Ajustar($idReserva, $motivo, $archivoReservas, $archivoAjustes) {
         public static function Ajustar($idReserva, $motivo, $importeNuevo, $archivoReservas, $archivoAjustes) {
             $reserva = ConsultaReservas::ConsultarReservaId($archivoReservas, $idReserva);
 

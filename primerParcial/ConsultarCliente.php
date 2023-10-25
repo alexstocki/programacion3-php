@@ -46,9 +46,9 @@
 
             foreach ($arrayClientes as $cliente) {
                 if (is_array($cliente)) {
-                    $c = new ClienteAlta($cliente["nombreApellido"], $cliente["tipoDocumento"], $cliente["numeroDocumento"], $cliente["email"], $cliente["tipoCliente"], $cliente["pais"], $cliente["ciudad"], $cliente["telefono"], $cliente["id"]);
+                    $c = new ClienteAlta($cliente["nombreApellido"], $cliente["tipoDocumento"], $cliente["numeroDocumento"], $cliente["email"], $cliente["tipoCliente"], $cliente["pais"], $cliente["ciudad"], $cliente["telefono"], $cliente["id"], $cliente["modalidadPago"]);
                 } else {
-                    $c = new ClienteAlta($cliente->nombreApellido, $cliente->tipoDocumento, $cliente->numeroDocumento, $cliente->email, $cliente->tipoCliente, $cliente->pais, $cliente->ciudad, $cliente->telefono, $cliente->id);
+                    $c = new ClienteAlta($cliente->nombreApellido, $cliente->tipoDocumento, $cliente->numeroDocumento, $cliente->email, $cliente->tipoCliente, $cliente->pais, $cliente->ciudad, $cliente->telefono, $cliente->id, $cliente->modalidadPago);
                 }
                 array_push($clientes, $c);
             }
@@ -84,12 +84,27 @@
                     $c->ciudad = $cliente->ciudad;
                     $c->telefono = $cliente->telefono;
                     $c->id = $cliente->id;
+                    $c->modalidadPago = $cliente->modalidadPago;
+                    $c->estado = $cliente->estado;
                 }
             }
 
             ManejadorArchivo::Guardar($archivo, $clientes);
+
             echo "<br>Cliente modificado.<br>";
+
+            return true;
         }
 
+        public static function BuscarClientePorId($archivoClientes, $id) {
+            $clientes = ConsultarCliente::LeerClientes($archivoClientes);
 
+            foreach ($clientes as $c) {
+                if ($c->id == $id) {
+                    return $c;
+                }
+            }
+
+            return null;
+        }
     }

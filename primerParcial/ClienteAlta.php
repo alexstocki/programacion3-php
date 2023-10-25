@@ -2,16 +2,18 @@
     include_once "ManejadorArchivo.php";
 
     class ClienteAlta {
-        public function __construct($nombreApellido, $tipoDocumento, $numeroDocumento, $email, $tipoCliente, $pais, $ciudad, $telefono, $id = null) {
+        public function __construct($nombreApellido, $tipoDocumento, $numeroDocumento, $email, $tipoCliente, $pais, $ciudad, $telefono, $id, $modalidadPago = null) {
             $this->nombreApellido = $nombreApellido;
             $this->tipoDocumento = strtoupper($tipoDocumento);
             $this->numeroDocumento = $numeroDocumento;
             $this->email = $email;
-            $this->tipoCliente = strtoupper($tipoCliente);
+            // $this->tipoCliente = strtoupper($tipoCliente);
+            $this->tipoCliente = ClienteAlta::GenerarTipoCliente($tipoCliente, $tipoDocumento);
             $this->pais = $pais;
             $this->ciudad = $ciudad;
             $this->telefono = $telefono;
             $this->id = $id == null ? rand(1, 999999) : $id;
+            $this->modalidadPago = $modalidadPago == null ? 'Efectivo' : $modalidadPago;
         }
 
         // retorna un objeto JSON 
@@ -79,9 +81,9 @@
 
             foreach ($arrayClientes as $cliente) {
                 if (is_array($cliente)) {
-                    $c = new ClienteAlta($cliente["nombreApellido"], $cliente["tipoDocumento"], $cliente["numeroDocumento"], $cliente["email"], $cliente["tipoCliente"], $cliente["pais"], $cliente["ciudad"], $cliente["telefono"], $cliente["id"]);
+                    $c = new ClienteAlta($cliente["nombreApellido"], $cliente["tipoDocumento"], $cliente["numeroDocumento"], $cliente["email"], $cliente["tipoCliente"], $cliente["pais"], $cliente["ciudad"], $cliente["telefono"], $cliente["id"], $cliente["modalidadPago"]);
                 } else {
-                    $c = new ClienteAlta($cliente->nombreApellido, $cliente->tipoDocumento, $cliente->numeroDocumento, $cliente->email, $cliente->tipoCliente, $cliente->pais, $cliente->ciudad, $cliente->telefono, $cliente->id);
+                    $c = new ClienteAlta($cliente->nombreApellido, $cliente->tipoDocumento, $cliente->numeroDocumento, $cliente->email, $cliente->tipoCliente, $cliente->pais, $cliente->ciudad, $cliente->telefono, $cliente->id, $cliente->modalidadPago);
                 }
                 array_push($clientes, $c);
             }
@@ -90,12 +92,34 @@
         }  
 
         // compara dos clientes, tomando como referencia: nombre y apellido y tipo de cliente
+        // private static function CompararClientes($clienteBase, $clienteIncoming) {
+        //     if ($clienteBase->nombreApellido == $clienteIncoming->nombreApellido &&
+        //         $clienteBase->tipoCliente == $clienteIncoming->tipoCliente) {
+        //         return true;
+        //     }
+            
+        //     return false;
+        // }
         private static function CompararClientes($clienteBase, $clienteIncoming) {
-            if ($clienteBase->nombreApellido == $clienteIncoming->nombreApellido &&
-                $clienteBase->tipoCliente == $clienteIncoming->tipoCliente) {
+            if ($clienteBase->id == $clienteIncoming->id &&
+                $clienteBase->numeroDocumento == $clienteIncoming->numeroDocumento) {
                 return true;
             }
             
             return false;
+        }
+
+        private static function GenerarTipoCliente($tipoCliente, $tipoDocumento) {
+            
+            $tipoClienteShort = strtoupper($tipoCliente);
+
+            if ($tipoClienteShort == 'INDIVIDUAL') {
+                $tipoClienteFinal = substr($tipoClienteShort, 0, 4) . strtoupper($tipoDocumento);
+            }
+            else {
+                $tipoClienteFinal = substr($tipoClienteShort, 0, 5) . strtoupper($tipoDocumento);
+            }
+            
+            return $tipoClienteFinal;
         }
     }

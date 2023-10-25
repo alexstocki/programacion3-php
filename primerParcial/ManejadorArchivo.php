@@ -46,4 +46,17 @@
                 echo "Error al guardar imagen<br>";
             }
         }
+
+        public static function BorrarImagen($carpetaInicial, $carpetaFinal, $nombreImagen) {
+            $ruta_origen = $carpetaInicial . $nombreImagen . ".jpg";
+            $ruta_destino = $carpetaFinal . $nombreImagen . ".jpg";
+
+            if (rename($ruta_origen, $ruta_destino)) {
+                echo "Imagen borrada con exito<br>";
+                return true;
+            } else {
+                echo "Error al borrar imagen<br>";
+                return false;
+            }
+        }
     }

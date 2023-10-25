@@ -6,6 +6,8 @@
     $nombre_archivo_reservas = "reservas.json";
     $carpeta_imagenes = "ImagenesDeReservas2023/";
 
+    var_dump($_FILES['imagen']);
+
     if (isset($_POST['tipoCliente']) && isset($_POST['numeroCliente'])
         && isset($_POST['fechaEntrada']) && isset($_POST['fechaSalida'])
         && isset($_POST['tipoHabitacion']) && isset($_POST['importeTotal'])

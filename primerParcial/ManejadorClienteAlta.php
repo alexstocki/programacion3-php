@@ -7,9 +7,10 @@
     if (isset($_POST['nombreApellido']) && isset($_POST['tipoDocumento']) 
         && isset($_POST['numeroDocumento']) && isset($_POST['email']) 
         && isset($_POST['tipoCliente']) && isset($_POST['pais']) 
-        && isset($_POST['ciudad']) && isset($_POST['telefono'])
+        && isset($_POST['ciudad']) && isset($_POST['telefono']) && isset($_POST['id'])
         && isset($_FILES['imagen'])) {
-            $cliente = new ClienteAlta($_POST['nombreApellido'], $_POST['tipoDocumento'], $_POST['numeroDocumento'], $_POST['email'], $_POST['tipoCliente'], $_POST['pais'], $_POST['ciudad'], $_POST['telefono']);
+            $modalidadPago = $_POST['modalidadPago'] != '' ? $_POST['modalidadPago'] : 'Efectivo';
+            $cliente = new ClienteAlta($_POST['nombreApellido'], $_POST['tipoDocumento'], $_POST['numeroDocumento'], $_POST['email'], $_POST['tipoCliente'], $_POST['pais'], $_POST['ciudad'], $_POST['telefono'], $_POST['id'], $modalidadPago);
             ClienteAlta::GuardarCliente($nombre_archivo, $cliente, $carpeta_imagenes);
         } 
         else {

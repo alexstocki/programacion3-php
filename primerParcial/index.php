@@ -33,6 +33,10 @@
             echo "Entro en el PUT - modificar cliente<br>";
             include "ModificarCliente.php";
             break;
+        case 'DELETE':
+            echo "Entro en el DELETE - eliminar cliente<br>";
+            include "ManejadorBorrarCliente.php";
+            break;
         default:
             echo "No implementado<br>";
             break;

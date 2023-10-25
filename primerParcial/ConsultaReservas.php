@@ -38,7 +38,8 @@
         public static function ConsultarReservasEntreDosFechas($archivo_reservas, $fechaDesde, $fechaHasta) {
             $reservas = ReservaHabitacion::LeerReservas($archivo_reservas);
             $reservasOrdenadas = [];
-
+            echo "Dentro de consultar<br>";
+            echo $reservas;
             foreach ($reservas as $reserva) {
                 if ($reserva->fechaDesde >= $fechaDesde && $reserva->fechaHasta <= $fechaHasta) {
                     array_push($reservasOrdenadas, $reserva);
